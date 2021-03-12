@@ -1,0 +1,44 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+<div id="app">
+  <button v-on:click="aumentar">Aumentar</button>
+  <button v-on:click="contador2++">Aumentar 2</button>
+  <button v-on:click="diminuir">Diminuir</button>
+  <p>Contador: {{ contador }} Contador 2: {{contador2}}</p>
+  <!-- funcao no computed soh referencia, sem chamar() -->
+  <p>Resultado: {{ resultado }}</p>
+</div>
+
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+      contador: 0,
+      contador2: 0,
+    },
+    computed: {
+      // soh vai chamar a funcao quando as variaveis dela tiverem sido alteradas
+      resultado() {
+        console.log('metodo computed resultado chamado...');
+        return this.contador >= 5 ?
+          'Maior ou igual a 5' : 'Menor que 5'
+      }
+    },
+    methods: {
+      aumentar() {
+        this.contador++
+      },
+      diminuir() {
+        this.contador--
+      },
+      // aqui ele vai chamar sempre que qualquer mudanca tenha sido feita,
+      // mesmo que nao tenha nada a ver
+
+      // resultado() {
+      //   console.log('metodo resultado chamado...');
+      //   return this.contador >= 5 ?
+      //     'Maior ou igual a 5' : 'Menor que 5'
+      // }
+    }
+  })
+</script>
