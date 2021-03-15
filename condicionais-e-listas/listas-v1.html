@@ -1,0 +1,23 @@
+<meta charset="UTF-8">
+<script src="https://unpkg.com/vue"></script>
+
+<div id="app">
+  <ul style="background-color: rgba(53, 158, 228, 0.467)">
+
+    <!-- * v-for direto na tag que vai ser repetida -->
+    <li v-for="cor in cores" :style="{color: cor}">{{ cor }}</li>
+  </ul>
+</div>
+
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+      cores: ['red', 'green', 'blue', 'yellow'],
+      pessoas: [
+        { nome: 'Ana', idade: 26, peso: 59 },
+        { nome: 'Guilherme', idade: 22, peso: 89 }
+      ]
+    }
+  })
+</script>
