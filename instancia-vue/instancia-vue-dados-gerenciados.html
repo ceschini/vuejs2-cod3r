@@ -1,0 +1,27 @@
+<meta charset="UTF-8">
+<script src="https://unpkg.com/vue"></script>
+
+<div id="app">
+  <p>{{ titulo }} {{ novaInfo }}</p>
+  <button @click="alterar">Alterar</button>
+</div>
+
+<script>
+  const vm = new Vue({
+    el: '#app',
+    data: {
+      titulo: 'Teste 1'
+    },
+    methods: {
+      alterar() {
+        this.titulo += '??'
+      }
+    }
+  })
+
+  // tem como criar dados diretamente dentro da instancia do vue
+  // porem ele nao vai ser reativo e nao vai ter todas as caracteristicas
+  // presentes nos dados criados da forma correta, dentro da instancia
+  vm.novaInfo = 'Teste'
+  console.log(vm.novaInfo);
+</script>

@@ -1,0 +1,56 @@
+<meta charset="UTF-8">
+
+<div id="app">
+  {{ nome }} {{ sobrenome }} {{ 4 / 2 }}
+</div>
+
+<script>
+  function MeuVue(params) {
+    this.$el = document.querySelector(params.el)
+    this.$data = params.data
+
+    for (let atr in this.$data) {
+      Object.defineProperty(this, atr, {
+        get: () => {
+          return this.$data[atr]
+        },
+        set: (value) => {
+          this.$data[atr] = value
+        }
+      })
+    }
+
+    // interpolacao
+
+    const regex = /\{\{([\s\w+*-/]*)\}\}/g
+    // resultado do grupo de captura da regex, o que ta dentro dos []
+    // vai ser armazenado dentro de $1
+    this.$el.innerHTML = this.$el.innerHTML.replace(regex, (match, $1) => {
+      const value = this[$1.trim()] // this[nome], this[sobrenome] e this[1 + 1]
+      return value ? value : eval($1) // eval faz 1 + 1 ser avaliado e virar 2
+    })
+  }
+
+  const vm = new MeuVue({
+    el: '#app',
+    data: {
+      nome: 'Maria',
+      sobrenome: 'Silva'
+    }
+  })
+
+  console.log(vm.nome); // usou getter
+  console.log(vm.$data.nome); // acessou diretamente
+
+  vm.nome = 'Pedro' // usou setter
+  console.log(vm.nome);
+  console.log(vm.$data.nome);
+
+  // nao funciona pq foi inserido diretamente no obj
+  // e nao passou pela criacao dos getters e setters
+  // isso quer dizer que idade nao eh reativa
+
+  // vm.idade = 31
+  vm.$data.idade = 31
+  console.log(vm.idade);
+</script>

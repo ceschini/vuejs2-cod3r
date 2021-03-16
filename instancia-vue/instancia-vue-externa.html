@@ -1,0 +1,45 @@
+<meta charset="UTF-8">
+<script src="https://unpkg.com/vue"></script>
+
+<div id="app1">
+  <p>{{ titulo1 }}</p>
+  <button @click="alterar">Alterar</button>
+</div>
+
+<div id="app2">
+  <p>{{ titulo2 }}</p>
+  <button @click="alterar">Alterar</button>
+</div>
+
+<script>
+  // uma instancia pode modificar dados da outra
+  const vm1 = new Vue({
+    el: '#app1',
+    data: {
+      titulo1: 'Vue 1'
+    },
+    methods: {
+      alterar() {
+        vm2.titulo2 += '??'
+      }
+    }
+  })
+
+  const vm2 = new Vue({
+    el: '#app2',
+    data: {
+      titulo2: 'Vue 2'
+    },
+    methods: {
+      alterar() {
+        vm1.titulo1 += '!!!'
+      }
+    }
+  })
+
+  // tem como acessar os dados do vue de fora da instancia
+  // perigoso e nao recomendado
+  setTimeout(() => {
+    vm1.titulo1 = 'Alterado pelo timer'
+  }, 2000)
+</script>

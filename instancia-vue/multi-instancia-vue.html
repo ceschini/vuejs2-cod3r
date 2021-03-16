@@ -1,0 +1,42 @@
+<meta charset="UTF-8">
+<script src="https://unpkg.com/vue"></script>
+
+<div id="app1">
+  {{ titulo1 }}
+  <button @click="alterar">Alterar</button>
+</div>
+
+<div id="app2">
+  {{ titulo2 }}
+  <button @click="alterar">Alterar</button>
+</div>
+
+<script>
+  // eh possivel ter multiplas instancias do vue
+  // cada uma com seus componentes
+  // porem elas nao compartilham os mesmos diretamente
+  // nao tem pq ter mais de uma
+  new Vue({
+    el: '#app1',
+    data: {
+      titulo1: 'Instancia Vue 1'
+    },
+    methods: {
+      alterar() {
+        this.titulo1 += '!!!'
+      }
+    }
+  })
+
+  new Vue({
+    el: '#app2',
+    data: {
+      titulo2: 'Instancia Vue 2'
+    },
+    methods: {
+      alterar() {
+        this.titulo2 += '!!!'
+      }
+    }
+  })
+</script>
